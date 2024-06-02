@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="html, css, 網頁, JS, javascript">
+    <meta name="description" content="Here is my page.">
+    <meta name="author" content="Joy">
+
+    <!-- Bootstrap 字体和样式 -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC|Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- FontAwesome 图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS 文件 -->
+    {% load static %}
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css">
+    <!-- 网站小图标 -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- 重置 CSS -->
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <!-- 基础 CSS -->
+    <link rel="stylesheet" href="{% static 'css/basic.css' %}">
+    <!-- 页面 CSS -->
+    <link rel="stylesheet" href="{% static 'css/style1.css' %}">
+
+    <title>{% block title %}Product List{% endblock %}</title>
+
+    <!-- 自定义 CSS -->
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'header1.html' %}
+    <div class="container">
+        <h1 class="text-center">Your Cart</h1>
+        <ul class="list-group">
+            {% for item in cart.cartitem_set.all %}
+            <li class="list-group-item">
+                {{ item.product.name }} - Price: {{ item.product.price }} - Quantity: {{ item.quantity }}
+            </li>
+            {% endfor %}
+        </ul>
+        <h2 class="mt-3">Total Price: ${{ total_price }}</h2>
+        <a class="btn btn-lg btn-primary" href="{% url 'checkout' %}" role="button" target="_blank">確認結帳 &#187;</a>
+    </div>
+    <!-- 引入 Bootstrap JS 和 jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
