@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ecommerce-website
+    env: python
+    pythonVersion: 3.11.9
+    poetryVersion: 1.7.1
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: gunicorn ecommerce_website.wsgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: YOUR_SECRET_KEY
+      - key: DJANGO_DEBUG
+        value: 'false'
+      - key: DATABASE_URL
+        value: YOUR_DATABASE_URL
